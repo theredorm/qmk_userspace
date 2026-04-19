@@ -21,9 +21,9 @@
 enum dilemma_keymap_layers {
     LAYER_BASE = 0,
     LAYER_NUMERAL,
-    LAYER_FUNCTION,
     LAYER_NAVIGATION,
     LAYER_MEDIA,
+    LAYER_FUNCTION,
     LAYER_POINTER,
     LAYER_SYMBOLS,
 };
@@ -31,14 +31,17 @@ enum dilemma_keymap_layers {
 // Automatically enable sniping-mode on the pointer layer.
 // #define DILEMMA_AUTO_SNIPING_ON_LAYER LAYER_POINTER
 
+#define DILEMMA_MINIMUM_DEFAULT_DPI 100
+#define DILEMMA_DEFAULT_DPI_CONFIG_STEP 1
+
 #define ESC_NUM LT(LAYER_NUMERAL, KC_ESC)
-#define SPC_MEDIA LT(LAYER_MEDIA, KC_SPC)
+#define MO_NAV MO(LAYER_NAVIGATION)
+
 #define TAB_FUN LT(LAYER_FUNCTION, KC_TAB)
 #define ENT_SYM LT(LAYER_SYMBOLS, KC_ENT)
 #define BSP_NUM LT(LAYER_NUMERAL, KC_BSPC)
 #define PT_Z LT(LAYER_POINTER, KC_Z)
 #define PT_SLSH LT(LAYER_POINTER, KC_SLSH)
-#define MO_NAV MO(LAYER_NAVIGATION)
 
 #ifndef POINTING_DEVICE_ENABLE
 #    define DRGSCRL KC_NO
@@ -54,7 +57,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                          KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
        LSFT_T(KC_A), LALT_T(KC_S), LGUI_T(KC_D), LCTL_T(KC_F), KC_G,      KC_H, RCTL_T(KC_J), LGUI_T(KC_K), LALT_T(KC_L), LSFT_T(KC_QUOT),
        PT_Z,    RALT_T(KC_X),    KC_C,    KC_V,    KC_B,                  KC_N,    KC_M, KC_COMM,  RALT_T(KC_DOT), PT_SLSH,
-                      MO_NAV, TAB_FUN, SPC_MEDIA,                         ENT_SYM, BSP_NUM, ESC_NUM
+                      MO_NAV, TAB_FUN, LT(LAYER_MEDIA, KC_SPC),                         ENT_SYM, BSP_NUM, ESC_NUM
   ),
 
   [LAYER_NUMERAL] = LAYOUT_split_3x5_3(
@@ -72,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [LAYER_MEDIA] = LAYOUT_split_3x5_3(
-    XXXXXXX, XXXXXXX, XXXXXXX, KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP,        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    KC_A, XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU,                          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                       XXXXXXX, XXXXXXX, _______,                          XXXXXXX, XXXXXXX, XXXXXXX
