@@ -31,7 +31,7 @@ enum dilemma_keymap_layers {
 // Automatically enable sniping-mode on the pointer layer.
 // #define DILEMMA_AUTO_SNIPING_ON_LAYER LAYER_POINTER
 
-#define DILEMMA_MINIMUM_DEFAULT_DPI 1000
+#define DILEMMA_MINIMUM_DEFAULT_DPI 700
 #define DILEMMA_DEFAULT_DPI_CONFIG_STEP 1
 
 #define ESC_NUM LT(LAYER_NUMERAL, KC_ESC)
