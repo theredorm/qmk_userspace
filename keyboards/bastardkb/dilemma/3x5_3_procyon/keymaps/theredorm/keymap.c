@@ -65,6 +65,13 @@ combo_t key_combos[] = {
   [ER_LPRN] = COMBO(er_combo, KC_LPRN),
 };
 
+const key_override_t semicolon_colon_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_COLN, KC_SCLN);
+
+// This globally defines all key overrides to be used
+const key_override_t *key_overrides[] = {
+    &semicolon_colon_key_override
+};
+
 // clang-format off
 /** \brief QWERTY layout (3 rows, 10 columns). */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -77,7 +84,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [LAYER_NUMERAL] = LAYOUT_split_3x5_3(
     XXXXXXX,      XXXXXXX,      XXXXXXX,      KC_SLASH,     KC_BSLS,                       KC_MINUS,     KC_7,         KC_8,         KC_9,         KC_0,
-    KC_LSFT,      KC_LALT,      KC_LGUI,      KC_LCTL,      XXXXXXX,                       KC_EQUAL,     KC_4,         KC_5,         KC_6,             ,
+    KC_LSFT,      KC_LALT,      KC_LGUI,      KC_LCTL,      XXXXXXX,                       KC_EQUAL,     KC_4,         KC_5,         KC_6,         KC_COLN,
     XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,                       XXXXXXX,      KC_1,         KC_2,         KC_3,         XXXXXXX,
                                 KC_GRAVE,     KC_LBRC,      KC_RBRC,                       XXXXXXX,      XXXXXXX,      _______
   ),
