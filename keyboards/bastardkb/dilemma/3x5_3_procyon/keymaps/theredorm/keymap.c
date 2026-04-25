@@ -61,8 +61,8 @@ const uint16_t PROGMEM ui_combo[] = {KC_U, KC_I, COMBO_END};
 const uint16_t PROGMEM er_combo[] = {KC_E, KC_R, COMBO_END};
 
 combo_t key_combos[] = {
-  [UI_RPRN] = COMBO(ui_combo, KC_RPRN),
-  [ER_LPRN] = COMBO(er_combo, KC_LPRN),
+  [UI_RPRN] = COMBO(ui_combo, KC_RIGHT_PAREN),
+  [ER_LPRN] = COMBO(er_combo, KC_LEFT_PAREN),
 };
 
 const key_override_t semicolon_colon_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_COLN, KC_SCLN);
