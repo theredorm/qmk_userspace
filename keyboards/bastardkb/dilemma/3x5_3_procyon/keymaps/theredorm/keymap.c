@@ -52,6 +52,19 @@ enum dilemma_keymap_layers {
 #    define SNIPING KC_NO
 #endif // !POINTING_DEVICE_ENABLE
 
+enum combos {
+  UI_RPRN,
+  ER_LPRN,
+};
+
+const uint16_t PROGMEM ui_combo[] = {KC_U, KC_I, COMBO_END};
+const uint16_t PROGMEM er_combo[] = {KC_E, KC_R, COMBO_END};
+
+combo_t key_combos[] = {
+  [UI_RPRN] = COMBO(ui_combo, KC_RPRN),
+  [ER_LPRN] = COMBO(er_combo, KC_LPRN),
+};
+
 // clang-format off
 /** \brief QWERTY layout (3 rows, 10 columns). */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -64,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [LAYER_NUMERAL] = LAYOUT_split_3x5_3(
     XXXXXXX,      XXXXXXX,      XXXXXXX,      KC_SLASH,     KC_BSLS,                       KC_MINUS,     KC_7,         KC_8,         KC_9,         KC_0,
-    KC_LSFT,      KC_LALT,      KC_LGUI,      KC_LCTL,      XXXXXXX,                       KC_EQUAL,     KC_4,         KC_5,         KC_6,         KC_SEMICOLON,
+    KC_LSFT,      KC_LALT,      KC_LGUI,      KC_LCTL,      XXXXXXX,                       KC_EQUAL,     KC_4,         KC_5,         KC_6,             ,
     XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,                       XXXXXXX,      KC_1,         KC_2,         KC_3,         XXXXXXX,
                                 KC_GRAVE,     KC_LBRC,      KC_RBRC,                       XXXXXXX,      XXXXXXX,      _______
   ),
