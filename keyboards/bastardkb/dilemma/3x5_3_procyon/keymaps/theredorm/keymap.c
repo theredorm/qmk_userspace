@@ -32,12 +32,12 @@ enum dilemma_keymap_layers {
 #define DILEMMA_MINIMUM_DEFAULT_DPI 500
 #define DILEMMA_DEFAULT_DPI_CONFIG_STEP 1
 
-#define ESC_NUM LT(LAYER_NUMERAL, KC_ESC)
+#define ESC_ESC KC_ESC
 #define MO_NAV MO(LAYER_NAVIGATION)
 
 #define TAB_TAB KC_TAB
-#define ENT_ENT KC_ENT
-#define BSP_NUM LT(LAYER_NUMERAL, KC_BSPC)
+#define ENT_NUM LT(LAYER_NUMERAL, KC_ENT)
+#define BSP_BSP KC_BSPC
 #define SPC_NAV LT(LAYER_NAVIGATION, KC_SPC)
 #define PT_Z LT(LAYER_POINTER, KC_Z)
 #define PT_SLSH LT(LAYER_POINTER, KC_SLSH)
@@ -52,14 +52,17 @@ enum dilemma_keymap_layers {
 enum combos {
   UI_RPRN,
   ER_LPRN,
+  JK_EQUAL,
 };
 
 const uint16_t PROGMEM ui_combo[] = {KC_U, KC_I, COMBO_END};
 const uint16_t PROGMEM er_combo[] = {KC_E, KC_R, COMBO_END};
+const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
 
 combo_t key_combos[] = {
   [UI_RPRN] = COMBO(ui_combo, KC_RIGHT_PAREN),
   [ER_LPRN] = COMBO(er_combo, KC_LEFT_PAREN),
+  [JK_EQUAL] = COMBO(jk_combo, KC_EQUAL),
 };
 
 const key_override_t semicolon_colon_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_COLN, KC_SCLN);
@@ -78,21 +81,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Q,         KC_W,         KC_E,         KC_R,         KC_T,                          KC_Y,         KC_U,         KC_I,         KC_O,         KC_P,
     LSFT_T(KC_A), LALT_T(KC_S), LGUI_T(KC_D), LCTL_T(KC_F), KC_G,                          KC_H,         RCTL_T(KC_J), LGUI_T(KC_K), LALT_T(KC_L), LSFT_T(KC_QUOT),
     PT_Z,         RALT_T(KC_X), KC_C,         KC_V,         KC_B,                          KC_N,         KC_M,         KC_COMM,      RALT_T(KC_DOT), PT_SLSH,
-                                MO_NAV,       TAB_TAB,      SPC_NAV,                       ENT_ENT,      BSP_NUM,      ESC_NUM
+                                KC_LALT,      TAB_TAB,      SPC_NAV,                       ENT_NUM,      BSP_BSP,      ESC_ESC
   ),
 
   [LAYER_NUMERAL] = LAYOUT_split_3x5_3(
     XXXXXXX,      XXXXXXX,      XXXXXXX,      KC_SLASH,     KC_BSLS,                       KC_MINUS,     KC_7,         KC_8,         KC_9,         KC_0,
     KC_LSFT,      KC_LALT,      KC_LGUI,      KC_LCTL,      XXXXXXX,                       KC_EQUAL,     KC_4,         KC_5,         KC_6,         KC_COLN,
     XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,                       XXXXXXX,      KC_1,         KC_2,         KC_3,         XXXXXXX,
-                                KC_TILD,      KC_LBRC,      KC_RBRC,                       XXXXXXX,      XXXXXXX,      _______
+                                KC_TILD,      KC_LBRC,      KC_RBRC,                       XXXXXXX,      BSP_BSP,      ESC_ESC
   ),
 
   [LAYER_NAVIGATION] = LAYOUT_split_3x5_3(
     XXXXXXX,      XXXXXXX,      XXXXXXX,      KC_VOLD,      KC_VOLU,                       XXXXXXX,      LCTL(KC_LEFT),XXXXXXX,      LCTL(KC_RGHT),XXXXXXX,
     KC_LSFT,      KC_LALT,      KC_LGUI,      KC_LCTL,      XXXXXXX,                       KC_LEFT,      KC_DOWN,      KC_UP,         KC_RGHT,      XXXXXXX,
     XXXXXXX,      KC_RALT,      XXXXXXX,      XXXXXXX,      XXXXXXX,                       XXXXXXX,      KC_HOME,      XXXXXXX,      KC_END,       XXXXXXX,
-                                _______,      XXXXXXX,      XXXXXXX,                       XXXXXXX,      XXXXXXX,      XXXXXXX
+                                KC_LALT,      TAB_TAB,      _______,                       XXXXXXX,      BSP_BSP,      ESC_ESC
   ),
 
   [LAYER_POINTER] = LAYOUT_split_3x5_3(
