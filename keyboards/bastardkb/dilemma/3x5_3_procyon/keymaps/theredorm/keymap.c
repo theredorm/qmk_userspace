@@ -20,8 +20,11 @@
 
 enum dilemma_keymap_layers {
     LAYER_BASE = 0,
+    LAYER_BASE_MAC,
     LAYER_NUMERAL,
+    LAYER_NUMERAL_MAC,
     LAYER_NAVIGATION,
+    LAYER_NAVIGATION_MAC,
     LAYER_POINTER,
 };
 
@@ -41,6 +44,9 @@ enum dilemma_keymap_layers {
 #define SPC_NAV LT(LAYER_NAVIGATION, KC_SPC)
 #define PT_Z LT(LAYER_POINTER, KC_Z)
 #define PT_SLSH LT(LAYER_POINTER, KC_SLSH)
+
+#define ENT_NMC LT(LAYER_NUMERAL_MAC, KC_ENT)
+#define SPC_NMC LT(LAYER_NAVIGATION_MAC, KC_SPC)
 
 #ifndef POINTING_DEVICE_ENABLE
 #    define DRGSCRL KC_NO
@@ -78,31 +84,52 @@ const key_override_t *key_overrides[] = {
 /** \brief QWERTY layout (3 rows, 10 columns). */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LAYER_BASE] = LAYOUT_split_3x5_3(
-    KC_Q,         KC_W,         KC_E,         KC_R,         KC_T,                          KC_Y,         KC_U,         KC_I,         KC_O,         KC_P,
-    LSFT_T(KC_A), LALT_T(KC_S), LGUI_T(KC_D), LCTL_T(KC_F), KC_G,                          KC_H,         RCTL_T(KC_J), LGUI_T(KC_K), LALT_T(KC_L), LSFT_T(KC_QUOT),
-    PT_Z,         RALT_T(KC_X), KC_C,         KC_V,         KC_B,                          KC_N,         KC_M,         KC_COMM,      RALT_T(KC_DOT), PT_SLSH,
-                                KC_LALT,      TAB_TAB,      SPC_NAV,                       ENT_NUM,      BSP_BSP,      ESC_ESC
+    KC_Q,            KC_W,            KC_E,            KC_R,            KC_T,              KC_Y,            KC_U,            KC_I,            KC_O,            KC_P,
+    LSFT_T(KC_A),    LALT_T(KC_S),    LGUI_T(KC_D),    LCTL_T(KC_F),    KC_G,              KC_H,            RCTL_T(KC_J),    LGUI_T(KC_K),    LALT_T(KC_L),    LSFT_T(KC_QUOT),
+    PT_Z,            RALT_T(KC_X),    KC_C,            KC_V,            KC_B,              KC_N,            KC_M,            KC_COMM,         RALT_T(KC_DOT),  PT_SLSH,
+                                      KC_LALT,         TAB_TAB,         SPC_NAV,           ENT_NUM,         BSP_BSP,         ESC_ESC
   ),
 
   [LAYER_NUMERAL] = LAYOUT_split_3x5_3(
-    XXXXXXX,      XXXXXXX,      XXXXXXX,      KC_SLASH,     KC_BSLS,                       KC_MINUS,     KC_7,         KC_8,         KC_9,         KC_0,
-    KC_LSFT,      KC_LALT,      KC_LGUI,      KC_LCTL,      XXXXXXX,                       KC_EQUAL,     KC_4,         KC_5,         KC_6,         KC_COLN,
-    XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,                       XXXXXXX,      KC_1,         KC_2,         KC_3,         XXXXXXX,
-                                KC_TILD,      KC_LBRC,      KC_RBRC,                       XXXXXXX,      BSP_BSP,      ESC_ESC
+    XXXXXXX,         XXXXXXX,         XXXXXXX,         KC_SLASH,        KC_BSLS,           KC_MINUS,        KC_7,            KC_8,            KC_9,            KC_0,
+    KC_LSFT,         KC_LALT,         KC_LGUI,         KC_LCTL,         XXXXXXX,           KC_EQUAL,        KC_4,            KC_5,            KC_6,            KC_COLN,
+    XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,           XXXXXXX,         KC_1,            KC_2,            KC_3,            XXXXXXX,
+                                      KC_TILD,         KC_LBRC,         KC_RBRC,           XXXXXXX,         BSP_BSP,         ESC_ESC
   ),
 
   [LAYER_NAVIGATION] = LAYOUT_split_3x5_3(
-    XXXXXXX,      XXXXXXX,      XXXXXXX,      KC_VOLD,      KC_VOLU,                       XXXXXXX,      LCTL(KC_LEFT),XXXXXXX,      LCTL(KC_RGHT),XXXXXXX,
-    KC_LSFT,      KC_LALT,      KC_LGUI,      KC_LCTL,      MS_BTN1,                       KC_LEFT,      KC_DOWN,      KC_UP,         KC_RGHT,      XXXXXXX,
-    XXXXXXX,      KC_RALT,      XXXXXXX,      XXXXXXX,      DRGSCRL,                       XXXXXXX,      KC_HOME,      XXXXXXX,      KC_END,       XXXXXXX,
-                                KC_LALT,      TAB_TAB,      _______,                       XXXXXXX,      BSP_BSP,      ESC_ESC
+    XXXXXXX,         XXXXXXX,         XXXXXXX,         KC_VOLD,         KC_VOLU,           XXXXXXX,         LCTL(KC_LEFT),   XXXXXXX,         LCTL(KC_RGHT),   XXXXXXX,
+    KC_LSFT,         KC_LALT,         KC_LGUI,         KC_LCTL,         MS_BTN1,           KC_LEFT,         KC_DOWN,         KC_UP,           KC_RGHT,         XXXXXXX,
+    XXXXXXX,         KC_RALT,         XXXXXXX,         XXXXXXX,         DRGSCRL,           XXXXXXX,         KC_HOME,         XXXXXXX,         KC_END,          XXXXXXX,
+                                      KC_LALT,         TAB_TAB,         _______,           XXXXXXX,         BSP_BSP,         ESC_ESC
   ),
 
   [LAYER_POINTER] = LAYOUT_split_3x5_3(
-    QK_BOOT,      EE_CLR,       XXXXXXX,      DPI_MOD,      S_D_MOD,                       S_D_MOD,      DPI_MOD,      XXXXXXX,      EE_CLR,       QK_BOOT,
-    KC_LGUI,      KC_LALT,      KC_LCTL,      KC_LSFT,      XXXXXXX,                       XXXXXXX,      KC_LSFT,      KC_LCTL,      KC_LALT,      KC_LGUI,
-    _______,      DRGSCRL,      SNIPING,      MS_BTN3,      XXXXXXX,                       XXXXXXX,      MS_BTN3,      SNIPING,      DRGSCRL,      _______,
-                                MS_BTN3,      MS_BTN2,      MS_BTN1,                       MS_BTN1,      MS_BTN2,      MS_BTN3
+    QK_BOOT,         EE_CLR,          DF(LAYER_BASE),  DPI_MOD,         S_D_MOD,           S_D_MOD,         DPI_MOD,         DF(LAYER_BASE_MAC), EE_CLR,         QK_BOOT,
+    KC_LGUI,         KC_LALT,         KC_LCTL,         KC_LSFT,         XXXXXXX,           XXXXXXX,         KC_LSFT,         KC_LCTL,         KC_LALT,         KC_LGUI,
+    _______,         DRGSCRL,         SNIPING,         MS_BTN3,         XXXXXXX,           XXXXXXX,         MS_BTN3,         SNIPING,         DRGSCRL,         _______,
+                                      MS_BTN3,         MS_BTN2,         MS_BTN1,           MS_BTN1,         MS_BTN2,         MS_BTN3
+  ),
+
+  [LAYER_BASE_MAC] = LAYOUT_split_3x5_3(
+    KC_Q,            KC_W,            KC_E,            KC_R,            KC_T,              KC_Y,            KC_U,            KC_I,            KC_O,            KC_P,
+    LSFT_T(KC_A),    LALT_T(KC_S),    LCTL_T(KC_D),    LGUI_T(KC_F),    KC_G,              KC_H,            RGUI_T(KC_J),    LCTL_T(KC_K),    LALT_T(KC_L),    LSFT_T(KC_QUOT),
+    PT_Z,            RALT_T(KC_X),    KC_C,            KC_V,            KC_B,              KC_N,            KC_M,            KC_COMM,         RALT_T(KC_DOT),  PT_SLSH,
+                                      KC_LALT,         TAB_TAB,         SPC_NMC,           ENT_NMC,         BSP_BSP,         ESC_ESC
+  ),
+
+  [LAYER_NUMERAL_MAC] = LAYOUT_split_3x5_3(
+    XXXXXXX,         XXXXXXX,         XXXXXXX,         KC_SLASH,        KC_BSLS,           KC_MINUS,        KC_7,            KC_8,            KC_9,            KC_0,
+    KC_LSFT,         KC_LALT,         KC_LCTL,         KC_LGUI,         XXXXXXX,           KC_EQUAL,        KC_4,            KC_5,            KC_6,            KC_COLN,
+    XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,           XXXXXXX,         KC_1,            KC_2,            KC_3,            XXXXXXX,
+                                      KC_TILD,         KC_LBRC,         KC_RBRC,           XXXXXXX,         BSP_BSP,         ESC_ESC
+  ),
+
+  [LAYER_NAVIGATION_MAC] = LAYOUT_split_3x5_3(
+    XXXXXXX,         XXXXXXX,         XXXXXXX,         KC_VOLD,         KC_VOLU,           XXXXXXX,         LGUI(KC_LEFT),   XXXXXXX,         LGUI(KC_RGHT),   XXXXXXX,
+    KC_LSFT,         KC_LALT,         KC_LCTL,         KC_LGUI,         MS_BTN1,           KC_LEFT,         KC_DOWN,         KC_UP,           KC_RGHT,         XXXXXXX,
+    XXXXXXX,         KC_RALT,         XXXXXXX,         XXXXXXX,         DRGSCRL,           XXXXXXX,         KC_HOME,         XXXXXXX,         KC_END,          XXXXXXX,
+                                      KC_LALT,         TAB_TAB,         _______,           XXXXXXX,         BSP_BSP,         ESC_ESC
   ),
 };
 // clang-format off
@@ -115,14 +142,3 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 }
 #    endif // DILEMMA_AUTO_SNIPING_ON_LAYER
 #endif     // POINTING_DEVICE_ENABLE
-
-#ifdef ENCODER_MAP_ENABLE
-// clang-format off
-const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    [LAYER_BASE]       = {ENCODER_CCW_CW(MS_WHLD, MS_WHLU), ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
-    [LAYER_NAVIGATION] = {ENCODER_CCW_CW(KC_PGDN, KC_PGUP), ENCODER_CCW_CW(KC_VOLU, KC_VOLD)},
-    [LAYER_POINTER]    = {ENCODER_CCW_CW(RM_HUED, RM_HUEU), ENCODER_CCW_CW(RM_SATD, RM_SATU)},
-    [LAYER_NUMERAL]    = {ENCODER_CCW_CW(RM_VALD, RM_VALU), ENCODER_CCW_CW(RM_SPDD, RM_SPDU)},
-};
-// clang-format on
-#endif // ENCODER_MAP_ENABLE
