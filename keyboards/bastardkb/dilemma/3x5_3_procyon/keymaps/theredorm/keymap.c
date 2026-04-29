@@ -93,8 +93,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [LAYER_NAVIGATION] = LAYOUT_split_3x5_3(
     XXXXXXX,      XXXXXXX,      XXXXXXX,      KC_VOLD,      KC_VOLU,                       XXXXXXX,      LCTL(KC_LEFT),XXXXXXX,      LCTL(KC_RGHT),XXXXXXX,
-    KC_LSFT,      KC_LALT,      KC_LGUI,      KC_LCTL,      XXXXXXX,                       KC_LEFT,      KC_DOWN,      KC_UP,         KC_RGHT,      XXXXXXX,
-    XXXXXXX,      KC_RALT,      XXXXXXX,      XXXXXXX,      XXXXXXX,                       XXXXXXX,      KC_HOME,      XXXXXXX,      KC_END,       XXXXXXX,
+    KC_LSFT,      KC_LALT,      KC_LGUI,      KC_LCTL,      MS_BTN1,                       KC_LEFT,      KC_DOWN,      KC_UP,         KC_RGHT,      XXXXXXX,
+    XXXXXXX,      KC_RALT,      XXXXXXX,      XXXXXXX,      DRGSCRL,                       XXXXXXX,      KC_HOME,      XXXXXXX,      KC_END,       XXXXXXX,
                                 KC_LALT,      TAB_TAB,      _______,                       XXXXXXX,      BSP_BSP,      ESC_ESC
   ),
 
