@@ -31,6 +31,7 @@ enum dilemma_keymap_layers {
 // Automatically enable sniping-mode on the pointer layer.
 #define DILEMMA_AUTO_SNIPING_ON_LAYER LAYER_NAVIGATION
 #define DILEMMA_MINIMUM_SNIPING_DPI 200
+#define FLOW_TAP_TERM 150
 
 #define DILEMMA_MINIMUM_DEFAULT_DPI 500
 #define DILEMMA_DEFAULT_DPI_CONFIG_STEP 1
