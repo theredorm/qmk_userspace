@@ -58,17 +58,20 @@ enum dilemma_keymap_layers {
 enum combos {
   UI_RPRN,
   ER_LPRN,
-  JK_EQUAL,
+  JK_WIN_EQUAL,
+  JK_MAC_EQUAL,
 };
 
 const uint16_t PROGMEM ui_combo[] = {KC_U, KC_I, COMBO_END};
 const uint16_t PROGMEM er_combo[] = {KC_E, KC_R, COMBO_END};
-const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
+const uint16_t PROGMEM jk_win_combo[] = {LCTL_T(KC_J), LGUI_T(KC_K), COMBO_END};
+const uint16_t PROGMEM jk_mac_combo[] = {LGUI_T(KC_J), LCTL_T(KC_K), COMBO_END};
 
 combo_t key_combos[] = {
   [UI_RPRN] = COMBO(ui_combo, KC_RIGHT_PAREN),
   [ER_LPRN] = COMBO(er_combo, KC_LEFT_PAREN),
-  [JK_EQUAL] = COMBO(jk_combo, KC_EQUAL),
+  [JK_WIN_EQUAL] = COMBO(jk_win_combo, KC_EQUAL),
+  [JK_MAC_EQUAL] = COMBO(jk_mac_combo, KC_EQUAL),
 };
 
 const key_override_t semicolon_colon_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_COLN, KC_SCLN);
