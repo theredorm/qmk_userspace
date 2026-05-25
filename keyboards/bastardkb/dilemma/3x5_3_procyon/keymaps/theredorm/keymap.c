@@ -106,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [LAYER_NAVIGATION] = LAYOUT_split_3x5_3(
     XXXXXXX,         XXXXXXX,         XXXXXXX,         KC_VOLD,         KC_VOLU,           MS_WHLU,         LCTL(KC_LEFT),   XXXXXXX,         LCTL(KC_RGHT),   XXXXXXX,
-    KC_LSFT,         KC_LALT,         KC_LGUI,         KC_LCTL,         MS_BTN1,           KC_LEFT,         KC_DOWN,         KC_UP,           KC_RGHT,         XXXXXXX,
+    KC_LSFT,         KC_LALT,         KC_LGUI,         KC_LCTL,         MS_BTN1,           KC_LEFT,         KC_DOWN,         KC_UP,           KC_RGHT,         KC_COLN,
     KC_TILD,         KC_RALT,         XXXXXXX,         XXXXXXX,         DRGSCRL,           MS_WHLD,         KC_HOME,         XXXXXXX,         KC_END,          KC_SLSH,
                                       MO_NUM,         TAB_TAB,         _______,            KC_ENT,         BSP_BSP,         ESC_ESC
   ),
@@ -114,7 +114,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   [LAYER_POINTER] = LAYOUT_split_3x5_3(
-    QK_BOOT,         XXXXXXX,         DF(LAYER_BASE),  DPI_MOD,         S_D_MOD,           S_D_MOD,         DPI_MOD,         DF(LAYER_BASE_MAC), XXXXXXX,      QK_BOOT,
+    XXXXXXX,         XXXXXXX,         DF(LAYER_BASE),  DPI_MOD,         QK_BOOT,           QK_BOOT,         DPI_MOD,         DF(LAYER_BASE_MAC), XXXXXXX,      XXXXXXX,
     EE_CLR,          KC_LALT,         KC_LCTL,         KC_LSFT,         XXXXXXX,           XXXXXXX,         KC_LSFT,         KC_LCTL,         KC_LALT,         EE_CLR,
     _______,         DRGSCRL,         SNIPING,         MS_BTN3,         XXXXXXX,           XXXXXXX,         MS_BTN3,         SNIPING,         DRGSCRL,         _______,
                                       MS_BTN3,         MS_BTN2,         KC_CAPS,           KC_CAPS,         MS_BTN2,         MS_BTN3
@@ -137,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [LAYER_NAVIGATION_MAC] = LAYOUT_split_3x5_3(
     XXXXXXX,         XXXXXXX,         XXXXXXX,         KC_VOLD,         KC_VOLU,           MS_WHLU,         LGUI(KC_LEFT),   XXXXXXX,         LGUI(KC_RGHT),   XXXXXXX,
-    KC_LSFT,         KC_LALT,         KC_LGUI,         KC_LCTL,         MS_BTN1,           KC_LEFT,         KC_DOWN,         KC_UP,           KC_RGHT,         XXXXXXX,
+    KC_LSFT,         KC_LALT,         KC_LGUI,         KC_LCTL,         MS_BTN1,           KC_LEFT,         KC_DOWN,         KC_UP,           KC_RGHT,         KC_COLN,
     KC_TILD,         KC_RALT,         XXXXXXX,         XXXXXXX,         DRGSCRL,           MS_WHLD,         KC_HOME,         XXXXXXX,         KC_END,          KC_SLSH,
                                       MO_NUM_MAC,         TAB_TAB,         _______,        KC_ENT,         BSP_BSP,         ESC_ESC
   ),
