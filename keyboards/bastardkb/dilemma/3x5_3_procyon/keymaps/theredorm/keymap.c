@@ -57,6 +57,43 @@ enum dilemma_keymap_layers {
 #    define SNIPING KC_NO
 #endif // !POINTING_DEVICE_ENABLE
 
+enum tap_dances {
+  TD_1 = 0,
+  TD_2,
+  TD_3,
+  TD_4,
+  TD_5,
+  TD_6,
+  TD_7,
+  TD_8,
+  TD_9,
+  TD_0,
+};
+
+tap_dance_action_t tap_dance_actions[] = {
+  [TD_1] = ACTION_TAP_DANCE_DOUBLE(KC_1, KC_EXLM),
+  [TD_2] = ACTION_TAP_DANCE_DOUBLE(KC_2, KC_AT),
+  [TD_3] = ACTION_TAP_DANCE_DOUBLE(KC_3, KC_HASH),
+  [TD_4] = ACTION_TAP_DANCE_DOUBLE(KC_4, KC_DLR),
+  [TD_5] = ACTION_TAP_DANCE_DOUBLE(KC_5, KC_PERC),
+  [TD_6] = ACTION_TAP_DANCE_DOUBLE(KC_6, KC_CIRC),
+  [TD_7] = ACTION_TAP_DANCE_DOUBLE(KC_7, KC_AMPR),
+  [TD_8] = ACTION_TAP_DANCE_DOUBLE(KC_8, KC_ASTR),
+  [TD_9] = ACTION_TAP_DANCE_DOUBLE(KC_9, KC_LPRN),
+  [TD_0] = ACTION_TAP_DANCE_DOUBLE(KC_0, KC_RPRN),
+};
+
+#define TD_KC_1 TD(TD_1)
+#define TD_KC_2 TD(TD_2)
+#define TD_KC_3 TD(TD_3)
+#define TD_KC_4 TD(TD_4)
+#define TD_KC_5 TD(TD_5)
+#define TD_KC_6 TD(TD_6)
+#define TD_KC_7 TD(TD_7)
+#define TD_KC_8 TD(TD_8)
+#define TD_KC_9 TD(TD_9)
+#define TD_KC_0 TD(TD_0)
+
 enum combos {
   UI_RPRN,
   ER_LPRN,
@@ -98,9 +135,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [LAYER_NUMERAL] = LAYOUT_split_3x5_3(
-    XXXXXXX,         XXXXXXX,         XXXXXXX,         KC_PIPE,         XXXXXXX,           KC_UNDS,         KC_7,            KC_8,            KC_9,            KC_0,
-    KC_LSFT,         KC_LALT,         KC_LGUI,         KC_LCTL,         XXXXXXX,           KC_EQUAL,        KC_4,            KC_5,            KC_6,            KC_COLN,
-    KC_TILD,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,           XXXXXXX,         KC_1,            KC_2,            KC_3,            KC_SLSH,
+    XXXXXXX,         XXXXXXX,         XXXXXXX,         KC_PIPE,         XXXXXXX,           KC_UNDS,         TD_KC_7,         TD_KC_8,         TD_KC_9,         TD_KC_0,
+    KC_LSFT,         KC_LALT,         KC_LGUI,         KC_LCTL,         XXXXXXX,           KC_EQUAL,        TD_KC_4,         TD_KC_5,         TD_KC_6,         KC_COLN,
+    KC_TILD,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,           XXXXXXX,         TD_KC_1,         TD_KC_2,         TD_KC_3,         KC_SLSH,
                                       MO_NUM,          KC_LBRC,         KC_RBRC,           KC_ENT,          BSP_BSP,         ESC_ESC
   ),
 
@@ -129,9 +166,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [LAYER_NUMERAL_MAC] = LAYOUT_split_3x5_3(
-    XXXXXXX,         XXXXXXX,         XXXXXXX,         KC_PIPE,         XXXXXXX,           KC_UNDS,         KC_7,            KC_8,            KC_9,            KC_0,
-    KC_LSFT,         KC_LALT,         KC_LGUI,         KC_LCTL,         XXXXXXX,           KC_EQUAL,        KC_4,            KC_5,            KC_6,            KC_COLN,
-    KC_TILD,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,           XXXXXXX,         KC_1,            KC_2,            KC_3,            KC_SLSH,
+    XXXXXXX,         XXXXXXX,         XXXXXXX,         KC_PIPE,         XXXXXXX,           KC_UNDS,         TD_KC_7,         TD_KC_8,         TD_KC_9,         TD_KC_0,
+    KC_LSFT,         KC_LALT,         KC_LGUI,         KC_LCTL,         XXXXXXX,           KC_EQUAL,        TD_KC_4,         TD_KC_5,         TD_KC_6,         KC_COLN,
+    KC_TILD,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,           XXXXXXX,         TD_KC_1,         TD_KC_2,         TD_KC_3,         KC_SLSH,
                                       MO_NUM_MAC,      KC_LBRC,         KC_RBRC,           KC_ENT,          BSP_BSP,         ESC_ESC
   ),
 
