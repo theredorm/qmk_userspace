@@ -25,7 +25,7 @@ enum dilemma_keymap_layers {
     LAYER_NUMERAL_MAC,
     LAYER_NAVIGATION,
     LAYER_NAVIGATION_MAC,
-    LAYER_POINTER,
+    LAYER_SYSTEM,
 };
 
 // Automatically enable sniping-mode on the pointer layer.
@@ -44,8 +44,8 @@ enum dilemma_keymap_layers {
 #define ENT_NUM LT(LAYER_NUMERAL, KC_ENT)
 #define BSP_BSP KC_BSPC
 #define SPC_NAV LT(LAYER_NAVIGATION, KC_SPC)
-#define PT_Z LT(LAYER_POINTER, KC_Z)
-#define PT_SLSH LT(LAYER_POINTER, KC_SLSH)
+#define PT_Z LT(LAYER_SYSTEM, KC_Z)
+#define PT_SLSH LT(LAYER_SYSTEM, KC_SLSH)
 
 #define ENT_NMC LT(LAYER_NUMERAL_MAC, KC_ENT)
 #define SPC_NMC LT(LAYER_NAVIGATION_MAC, KC_SPC)
@@ -113,11 +113,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  [LAYER_POINTER] = LAYOUT_split_3x5_3(
-    XXXXXXX,         XXXXXXX,         DF(LAYER_BASE),  DPI_MOD,         QK_BOOT,           QK_BOOT,         DPI_MOD,         DF(LAYER_BASE_MAC), XXXXXXX,      XXXXXXX,
-    EE_CLR,          KC_LALT,         KC_LCTL,         KC_LSFT,         XXXXXXX,           XXXXXXX,         KC_LSFT,         KC_LCTL,            KC_LALT,      EE_CLR,
-    _______,         DRGSCRL,         SNIPING,         MS_BTN3,         XXXXXXX,           XXXXXXX,         MS_BTN3,         SNIPING,            DRGSCRL,      _______,
-                                      MS_BTN3,         MS_BTN2,         KC_CAPS,           KC_CAPS,         MS_BTN2,         MS_BTN3
+  [LAYER_SYSTEM] = LAYOUT_split_3x5_3(
+    XXXXXXX,         XXXXXXX,         DF(LAYER_BASE),  XXXXXXX,         QK_BOOT,           QK_BOOT,         XXXXXXX,         DF(LAYER_BASE_MAC), XXXXXXX,      XXXXXXX,
+    EE_CLR,          DT_DOWN,         DT_UP,           DT_PRNT,         XXXXXXX,           XXXXXXX,         XXXXXXX,         XXXXXXX,            XXXXXXX,      EE_CLR,
+    XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,           XXXXXXX,         XXXXXXX,         XXXXXXX,            XXXXXXX,      XXXXXXX,
+                                      XXXXXXX,         XXXXXXX,         KC_CAPS,           KC_CAPS,         XXXXXXX,         XXXXXXX
   ),
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
