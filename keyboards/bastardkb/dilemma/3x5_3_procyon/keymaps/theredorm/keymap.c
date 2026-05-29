@@ -20,12 +20,14 @@
 
 enum dilemma_keymap_layers {
     LAYER_BASE = 0,
-    LAYER_BASE_MAC,
     LAYER_NUMERAL,
-    LAYER_NUMERAL_MAC,
+    LAYER_SYMBOL,
     LAYER_NAVIGATION,
-    LAYER_NAVIGATION_MAC,
     LAYER_SYSTEM,
+    LAYER_BASE_MAC,
+    LAYER_NUMERAL_MAC,
+    LAYER_SYMBOL_MAC,
+    LAYER_NAVIGATION_MAC,
 };
 
 // Automatically enable sniping-mode on the pointer layer.
@@ -39,15 +41,17 @@ enum dilemma_keymap_layers {
 #define ESC_ESC KC_ESC
 #define MO_NUM MO(LAYER_NUMERAL)
 #define MO_NUM_MAC MO(LAYER_NUMERAL_MAC)
+#define MO_SYM MO(LAYER_SYMBOL)
+#define MO_SYM_MAC MO(LAYER_SYMBOL_MAC)
 
 #define TAB_TAB KC_TAB
-#define ENT_NUM LT(LAYER_NUMERAL, KC_ENT)
+#define ENT_NUM LT(LAYER_SYMBOL, KC_ENT)
 #define BSP_BSP KC_BSPC
 #define SPC_NAV LT(LAYER_NAVIGATION, KC_SPC)
 #define PT_Z LT(LAYER_SYSTEM, KC_Z)
 #define PT_SLSH LT(LAYER_SYSTEM, KC_SLSH)
 
-#define ENT_NMC LT(LAYER_NUMERAL_MAC, KC_ENT)
+#define ENT_NMC LT(LAYER_SYMBOL_MAC, KC_ENT)
 #define SPC_NMC LT(LAYER_NAVIGATION_MAC, KC_SPC)
 
 #ifndef POINTING_DEVICE_ENABLE
@@ -104,13 +108,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       MO_NUM,          KC_LBRC,         KC_RBRC,           KC_ENT,          BSP_BSP,         ESC_ESC
   ),
 
+  [LAYER_SYMBOL] = LAYOUT_split_3x5_3(
+    XXXXXXX,         XXXXXXX,         XXXXXXX,         KC_PIPE,         XXXXXXX,           KC_UNDS,         KC_AMPR,         KC_ASTR,         KC_LPRN,         KC_RPRN,
+    KC_LSFT,         KC_LALT,         KC_LGUI,         KC_LCTL,         XXXXXXX,           KC_EQUAL,        KC_DLR,          KC_PERC,         KC_CIRC,         KC_COLN,
+    KC_TILD,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,           XXXXXXX,         KC_EXLM,         KC_AT,           KC_HASH,         KC_SLSH,
+                                      MO_NUM,          KC_LBRC,         KC_RBRC,           KC_ENT,          BSP_BSP,         ESC_ESC
+  ),
+
   [LAYER_NAVIGATION] = LAYOUT_split_3x5_3(
     XXXXXXX,         XXXXXXX,         XXXXXXX,         KC_VOLD,         KC_VOLU,           MS_WHLU,         LCTL(KC_LEFT),   XXXXXXX,         LCTL(KC_RGHT),   XXXXXXX,
     KC_LSFT,         KC_LALT,         KC_LGUI,         KC_LCTL,         MS_BTN1,           KC_LEFT,         KC_DOWN,         KC_UP,           KC_RGHT,         KC_COLN,
     KC_TILD,         KC_RALT,         XXXXXXX,         XXXXXXX,         DRGSCRL,           MS_WHLD,         KC_HOME,         XXXXXXX,         KC_END,          KC_SLSH,
                                       MO_NUM,          TAB_TAB,         _______,           KC_ENT,          BSP_BSP,         ESC_ESC
   ),
-
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   [LAYER_SYSTEM] = LAYOUT_split_3x5_3(
@@ -132,6 +142,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,         XXXXXXX,         XXXXXXX,         KC_PIPE,         XXXXXXX,           KC_UNDS,         KC_7,            KC_8,            KC_9,            KC_0,
     KC_LSFT,         KC_LALT,         KC_LGUI,         KC_LCTL,         XXXXXXX,           KC_EQUAL,        KC_4,            KC_5,            KC_6,            KC_COLN,
     KC_TILD,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,           XXXXXXX,         KC_1,            KC_2,            KC_3,            KC_SLSH,
+                                      MO_NUM_MAC,      KC_LBRC,         KC_RBRC,           KC_ENT,          BSP_BSP,         ESC_ESC
+  ),
+
+  [LAYER_SYMBOL_MAC] = LAYOUT_split_3x5_3(
+    XXXXXXX,         XXXXXXX,         XXXXXXX,         KC_PIPE,         XXXXXXX,           KC_UNDS,         KC_AMPR,         KC_ASTR,         KC_LPRN,         KC_RPRN,
+    KC_LSFT,         KC_LALT,         KC_LGUI,         KC_LCTL,         XXXXXXX,           KC_EQUAL,        KC_DLR,          KC_PERC,         KC_CIRC,         KC_COLN,
+    KC_TILD,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,           XXXXXXX,         KC_EXLM,         KC_AT,           KC_HASH,         KC_SLSH,
                                       MO_NUM_MAC,      KC_LBRC,         KC_RBRC,           KC_ENT,          BSP_BSP,         ESC_ESC
   ),
 
