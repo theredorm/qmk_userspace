@@ -45,13 +45,13 @@ enum dilemma_keymap_layers {
 #define MO_SYM_MAC MO(LAYER_SYMBOL_MAC)
 
 #define TAB_TAB KC_TAB
-#define ENT_NUM LT(LAYER_SYMBOL, KC_ENT)
+#define ENT_NUM LT(LAYER_NUMERAL, KC_ENT)
 #define BSP_BSP KC_BSPC
 #define SPC_NAV LT(LAYER_NAVIGATION, KC_SPC)
 #define PT_Z LT(LAYER_SYSTEM, KC_Z)
 #define PT_SLSH LT(LAYER_SYSTEM, KC_SLSH)
 
-#define ENT_NMC LT(LAYER_SYMBOL_MAC, KC_ENT)
+#define ENT_NMC LT(LAYER_NUMERAL_MAC, KC_ENT)
 #define SPC_NMC LT(LAYER_NAVIGATION_MAC, KC_SPC)
 
 #ifndef POINTING_DEVICE_ENABLE
@@ -98,28 +98,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Q,            KC_W,            KC_E,            KC_R,            KC_T,              KC_Y,            KC_U,            KC_I,            KC_O,            KC_P,
     LSFT_T(KC_A),    LALT_T(KC_S),    LGUI_T(KC_D),    LCTL_T(KC_F),    KC_G,              KC_H,            LCTL_T(KC_J),    LGUI_T(KC_K),    LALT_T(KC_L),    LSFT_T(KC_QUOT),
     PT_Z,            RALT_T(KC_X),    KC_C,            KC_V,            KC_B,              KC_N,            KC_M,            KC_COMM,         RALT_T(KC_DOT),  PT_SLSH,
-                                      MO_NUM,          TAB_TAB,         SPC_NAV,           ENT_NUM,         BSP_BSP,         ESC_ESC
+                                      MO_SYM,          TAB_TAB,         SPC_NAV,           ENT_NUM,         BSP_BSP,         ESC_ESC
   ),
 
   [LAYER_NUMERAL] = LAYOUT_split_3x5_3(
     XXXXXXX,         XXXXXXX,         XXXXXXX,         KC_PIPE,         XXXXXXX,           KC_UNDS,         KC_7,            KC_8,            KC_9,            KC_0,
     KC_LSFT,         KC_LALT,         KC_LGUI,         KC_LCTL,         XXXXXXX,           KC_EQUAL,        KC_4,            KC_5,            KC_6,            KC_COLN,
     KC_TILD,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,           XXXXXXX,         KC_1,            KC_2,            KC_3,            KC_SLSH,
-                                      MO_NUM,          KC_LBRC,         KC_RBRC,           KC_ENT,          BSP_BSP,         ESC_ESC
+                                      MO_SYM,          KC_LBRC,         KC_RBRC,           KC_ENT,          BSP_BSP,         ESC_ESC
   ),
 
   [LAYER_SYMBOL] = LAYOUT_split_3x5_3(
     XXXXXXX,         XXXXXXX,         XXXXXXX,         KC_PIPE,         XXXXXXX,           KC_UNDS,         KC_AMPR,         KC_ASTR,         KC_LPRN,         KC_RPRN,
     KC_LSFT,         KC_LALT,         KC_LGUI,         KC_LCTL,         XXXXXXX,           KC_EQUAL,        KC_DLR,          KC_PERC,         KC_CIRC,         KC_COLN,
     KC_TILD,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,           XXXXXXX,         KC_EXLM,         KC_AT,           KC_HASH,         KC_SLSH,
-                                      MO_NUM,          KC_LBRC,         KC_RBRC,           KC_ENT,          BSP_BSP,         ESC_ESC
+                                      MO_SYM,          KC_LBRC,         KC_RBRC,           KC_ENT,          BSP_BSP,         ESC_ESC
   ),
 
   [LAYER_NAVIGATION] = LAYOUT_split_3x5_3(
     XXXXXXX,         XXXXXXX,         XXXXXXX,         KC_VOLD,         KC_VOLU,           MS_WHLU,         LCTL(KC_LEFT),   XXXXXXX,         LCTL(KC_RGHT),   XXXXXXX,
     KC_LSFT,         KC_LALT,         KC_LGUI,         KC_LCTL,         MS_BTN1,           KC_LEFT,         KC_DOWN,         KC_UP,           KC_RGHT,         KC_COLN,
     KC_TILD,         KC_RALT,         XXXXXXX,         XXXXXXX,         DRGSCRL,           MS_WHLD,         KC_HOME,         XXXXXXX,         KC_END,          KC_SLSH,
-                                      MO_NUM,          TAB_TAB,         _______,           KC_ENT,          BSP_BSP,         ESC_ESC
+                                      MO_SYM,          TAB_TAB,         _______,           KC_ENT,          BSP_BSP,         ESC_ESC
   ),
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -135,28 +135,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Q,            KC_W,            KC_E,            KC_R,            KC_T,              KC_Y,            KC_U,            KC_I,            KC_O,            KC_P,
     LSFT_T(KC_A),    LALT_T(KC_S),    LGUI_T(KC_D),    LCTL_T(KC_F),    KC_G,              KC_H,            LCTL_T(KC_J),    LGUI_T(KC_K),    LALT_T(KC_L),    LSFT_T(KC_QUOT),
     PT_Z,            RALT_T(KC_X),    KC_C,            KC_V,            KC_B,              KC_N,            KC_M,            KC_COMM,         RALT_T(KC_DOT),  PT_SLSH,
-                                      MO_NUM_MAC,      TAB_TAB,         SPC_NMC,           ENT_NMC,         BSP_BSP,         ESC_ESC
+                                      MO_SYM_MAC,      TAB_TAB,         SPC_NMC,           ENT_NMC,         BSP_BSP,         ESC_ESC
   ),
 
   [LAYER_NUMERAL_MAC] = LAYOUT_split_3x5_3(
     XXXXXXX,         XXXXXXX,         XXXXXXX,         KC_PIPE,         XXXXXXX,           KC_UNDS,         KC_7,            KC_8,            KC_9,            KC_0,
     KC_LSFT,         KC_LALT,         KC_LGUI,         KC_LCTL,         XXXXXXX,           KC_EQUAL,        KC_4,            KC_5,            KC_6,            KC_COLN,
     KC_TILD,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,           XXXXXXX,         KC_1,            KC_2,            KC_3,            KC_SLSH,
-                                      MO_NUM_MAC,      KC_LBRC,         KC_RBRC,           KC_ENT,          BSP_BSP,         ESC_ESC
+                                      MO_SYM_MAC,      KC_LBRC,         KC_RBRC,           KC_ENT,          BSP_BSP,         ESC_ESC
   ),
 
   [LAYER_SYMBOL_MAC] = LAYOUT_split_3x5_3(
     XXXXXXX,         XXXXXXX,         XXXXXXX,         KC_PIPE,         XXXXXXX,           KC_UNDS,         KC_AMPR,         KC_ASTR,         KC_LPRN,         KC_RPRN,
     KC_LSFT,         KC_LALT,         KC_LGUI,         KC_LCTL,         XXXXXXX,           KC_EQUAL,        KC_DLR,          KC_PERC,         KC_CIRC,         KC_COLN,
     KC_TILD,         XXXXXXX,         XXXXXXX,         XXXXXXX,         XXXXXXX,           XXXXXXX,         KC_EXLM,         KC_AT,           KC_HASH,         KC_SLSH,
-                                      MO_NUM_MAC,      KC_LBRC,         KC_RBRC,           KC_ENT,          BSP_BSP,         ESC_ESC
+                                      MO_SYM_MAC,      KC_LBRC,         KC_RBRC,           KC_ENT,          BSP_BSP,         ESC_ESC
   ),
 
   [LAYER_NAVIGATION_MAC] = LAYOUT_split_3x5_3(
     XXXXXXX,         XXXXXXX,         XXXXXXX,         KC_VOLD,         KC_VOLU,           MS_WHLU,         LGUI(KC_LEFT),   XXXXXXX,         LGUI(KC_RGHT),   XXXXXXX,
     KC_LSFT,         KC_LALT,         KC_LGUI,         KC_LCTL,         MS_BTN1,           KC_LEFT,         KC_DOWN,         KC_UP,           KC_RGHT,         KC_COLN,
     KC_TILD,         KC_RALT,         XXXXXXX,         XXXXXXX,         DRGSCRL,           MS_WHLD,         KC_HOME,         XXXXXXX,         KC_END,          KC_SLSH,
-                                      MO_NUM_MAC,      TAB_TAB,         _______,           KC_ENT,          BSP_BSP,         ESC_ESC
+                                      MO_SYM_MAC,      TAB_TAB,         _______,           KC_ENT,          BSP_BSP,         ESC_ESC
   ),
 };
 // clang-format off
