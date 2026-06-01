@@ -60,6 +60,15 @@ enum dilemma_keymap_layers {
 #    define SNIPING KC_NO
 #endif // !POINTING_DEVICE_ENABLE
 
+// Custom keycodes.
+// SFT_COLN: Left Shift on hold, a clean colon on tap. A plain SFT_COLN
+// mod-tap is broken here because KC_COLN already embeds Shift (Shift+;); the
+// mod-tap's shift bookkeeping cancels that embedded shift on tap and emits a
+// bare ';'. Handling the tap explicitly via tap_code16() sidesteps the clash.
+enum custom_keycodes {
+    SFT_COLN = QK_USER,
+};
+
 enum combos {
   UI_RPRN,
   ER_LPRN,
@@ -77,7 +86,11 @@ combo_t key_combos[] = {
   [JK_MAC_EQUAL] = COMBO(jk_mac_combo, KC_EQUAL),
 };
 
-const key_override_t semicolon_colon_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_COLN, KC_SCLN);
+// Restrict the colon->semicolon override to layers that have a *bare* KC_COLN.
+// It must not cover the numeral layers (which now use SFT_COLN): the override
+// matches KC_COLN's embedded shift and would otherwise strip it on tap.
+#define COLON_OVERRIDE_LAYERS ((1 << LAYER_NAVIGATION) | (1 << LAYER_NAVIGATION_MAC))
+const key_override_t semicolon_colon_key_override = ko_make_with_layers(MOD_MASK_SHIFT, KC_COLN, KC_SCLN, COLON_OVERRIDE_LAYERS);
 const key_override_t tilde_grave_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_TILD, KC_GRAVE);
 const key_override_t underscore_minus_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_UNDS, KC_MINUS);
 const key_override_t pipe_backslash_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_PIPE, KC_BSLS);
@@ -102,7 +115,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [LAYER_NUMERAL] = LAYOUT_split_3x5_3(
     KC_1,            KC_2,            KC_3,            KC_4,            KC_5,              KC_6,            KC_7,            KC_8,            KC_9,            KC_0,
-    KC_LSFT,         KC_LALT,         KC_LGUI,         KC_LCTL,         XXXXXXX,           KC_MINUS,        XXXXXXX,         XXXXXXX,         KC_LALT,         LSFT_T(KC_COLN),
+    KC_LSFT,         KC_LALT,         KC_LGUI,         KC_LCTL,         XXXXXXX,           KC_MINUS,        XXXXXXX,         XXXXXXX,         KC_LALT,         SFT_COLN,
     KC_TILD,         KC_PIPE,         XXXXXXX,         XXXXXXX,         XXXXXXX,           KC_EQUAL,        XXXXXXX,         KC_COMM,         KC_DOT,          PT_SLSH,
                                       MO_NAV,          KC_LBRC,         KC_RBRC,           KC_ENT_NUM,      BSP_BSP,         ESC_ESC
   ),
@@ -132,7 +145,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [LAYER_NUMERAL_MAC] = LAYOUT_split_3x5_3(
     KC_1,            KC_2,            KC_3,            KC_4,            KC_5,              KC_6,            KC_7,            KC_8,            KC_9,            KC_0,
-    KC_LSFT,         KC_LALT,         KC_LGUI,         KC_LCTL,         XXXXXXX,           KC_MINUS,        XXXXXXX,         XXXXXXX,         KC_LALT,         LSFT_T(KC_COLN),
+    KC_LSFT,         KC_LALT,         KC_LGUI,         KC_LCTL,         XXXXXXX,           KC_MINUS,        XXXXXXX,         XXXXXXX,         KC_LALT,         SFT_COLN,
     KC_TILD,         KC_PIPE,         XXXXXXX,         XXXXXXX,         XXXXXXX,           KC_EQUAL,        XXXXXXX,         XXXXXXX,         XXXXXXX,         PT_SLSH,
                                       MO_NAV_MAC ,     KC_LBRC,         KC_RBRC,           KC_ENT_NUM_MAC,  BSP_BSP,         ESC_ESC
   ),
@@ -145,6 +158,52 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 };
 // clang-format off
+
+// SFT_COLN: Left Shift on hold, colon on tap, semicolon on (external-shift)+tap.
+// Manual tap-hold so the tap goes through tap_code16() instead of a mod-tap,
+// which mishandles KC_COLN's embedded shift (see enum comment above).
+//   - tap, no other shift held     -> ':'  (KC_COLN)
+//   - tap, with another shift held -> ';'  (KC_SCLN), shift suppressed
+//   - hold                         -> Left Shift
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    static uint16_t sft_coln_timer    = 0;
+    static uint8_t  sft_coln_ext_shift = 0; // shift held by *other* keys at press time
+
+    if (keycode == SFT_COLN) {
+        if (record->event.pressed) {
+            sft_coln_timer     = timer_read();
+            sft_coln_ext_shift = get_mods() & MOD_MASK_SHIFT;
+            // Only add our own shift when none is held externally. If an external
+            // shift is already down, leave it untouched so it survives our release
+            // (otherwise a held shift would be cleared after the first tap).
+            if (!sft_coln_ext_shift) {
+                register_mods(MOD_BIT(KC_LSFT));
+            }
+        } else {
+            if (!sft_coln_ext_shift) {
+                unregister_mods(MOD_BIT(KC_LSFT));
+            }
+            if (timer_elapsed(sft_coln_timer) < TAPPING_TERM) {
+                // Tap: pick colon vs semicolon based on externally-held shift.
+                if (sft_coln_ext_shift) {
+                    // Another shift is down; suppress it just for this tap so the
+                    // host sees a bare ';', then restore it for subsequent keys.
+                    uint8_t saved = get_mods();
+                    del_mods(MOD_MASK_SHIFT);
+                    send_keyboard_report();
+                    tap_code16(KC_SCLN);
+                    set_mods(saved);
+                    send_keyboard_report();
+                } else {
+                    tap_code16(KC_COLN);
+                }
+            }
+        }
+        return false;
+    }
+
+    return true;
+}
 
 #ifdef POINTING_DEVICE_ENABLE
 #    ifdef DILEMMA_AUTO_SNIPING_ON_LAYER
