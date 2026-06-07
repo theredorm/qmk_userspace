@@ -22,10 +22,10 @@ enum dilemma_keymap_layers {
     LAYER_BASE = 0,
     LAYER_NUMERAL,
     LAYER_NAVIGATION,
-    LAYER_SYSTEM,
     LAYER_BASE_MAC,
     LAYER_NUMERAL_MAC,
     LAYER_NAVIGATION_MAC,
+    LAYER_SYSTEM,
 };
 
 // Automatically enable sniping-mode on the pointer layer.
@@ -140,7 +140,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Q,            KC_W,            KC_E,            KC_R,            KC_T,              KC_Y,            KC_U,            KC_I,            KC_O,            KC_P,
     LSFT_T(KC_A),    LALT_T(KC_S),    LGUI_T(KC_D),    LCTL_T(KC_F),    KC_G,              KC_H,            LCTL_T(KC_J),    LGUI_T(KC_K),    LALT_T(KC_L),    LSFT_T(KC_QUOT),
     KC_Z,            RALT_T(KC_X),    KC_C,            KC_V,            KC_B,              KC_N,            KC_M,            KC_COMM,         KC_DOT,          KC_SLSH,
-                                      MO_NAV_MAC,      TAB_TAB,         KC_SPC,           KC_ENT_NUM_MAC,  BSP_BSP,         ESC_ESC
+                                      MO_NAV_MAC,      TAB_TAB,         SPC_NMC,           KC_ENT_NUM_MAC,  BSP_BSP,         ESC_ESC
   ),
 
   [LAYER_NUMERAL_MAC] = LAYOUT_split_3x5_3(
