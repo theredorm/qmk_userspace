@@ -45,7 +45,6 @@ enum dilemma_keymap_layers {
 #define TAB_TAB KC_TAB
 #define BSP_BSP KC_BSPC
 #define SPC_NAV LT(LAYER_NAVIGATION, KC_SPC)
-#define PT_TILD LT(LAYER_SYSTEM, KC_TILD)
 #define PT_SLSH LT(LAYER_SYSTEM, KC_SLSH)
 
 #define KC_ENT_NUM LT(LAYER_NUMERAL, KC_ENT)
@@ -65,8 +64,15 @@ enum dilemma_keymap_layers {
 // mod-tap is broken here because KC_COLN already embeds Shift (Shift+;); the
 // mod-tap's shift bookkeeping cancels that embedded shift on tap and emits a
 // bare ';'. Handling the tap explicitly via tap_code16() sidesteps the clash.
+//
+// PT_TILD: LAYER_SYSTEM on hold, '~' on bare tap, '`' on shift+tap. A plain
+// LT(LAYER_SYSTEM, KC_TILD) plus a ko_make_basic(MOD_MASK_SHIFT, KC_TILD, ...)
+// override is broken because KC_TILD already embeds Shift (Shift+`); the
+// override matches that embedded shift on every tap and strips it, so a bare
+// tap emits '`' instead of '~'. Handle the tap explicitly instead.
 enum custom_keycodes {
     SFT_COLN = QK_USER,
+    PT_TILD,
 };
 
 enum combos {
@@ -91,14 +97,12 @@ combo_t key_combos[] = {
 // matches KC_COLN's embedded shift and would otherwise strip it on tap.
 #define COLON_OVERRIDE_LAYERS ((1 << LAYER_NAVIGATION) | (1 << LAYER_NAVIGATION_MAC))
 const key_override_t semicolon_colon_key_override = ko_make_with_layers(MOD_MASK_SHIFT, KC_COLN, KC_SCLN, COLON_OVERRIDE_LAYERS);
-const key_override_t tilde_grave_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_TILD, KC_GRAVE);
 const key_override_t underscore_minus_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_UNDS, KC_MINUS);
 const key_override_t pipe_backslash_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_PIPE, KC_BSLS);
 
 // This globally defines all key overrides to be used
 const key_override_t *key_overrides[] = {
     &semicolon_colon_key_override,
-    &tilde_grave_key_override,
     &underscore_minus_key_override,
     &pipe_backslash_key_override
 };
@@ -165,9 +169,40 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //   - tap, no other shift held     -> ':'  (KC_COLN)
 //   - tap, with another shift held -> ';'  (KC_SCLN), shift suppressed
 //   - hold                         -> Left Shift
+// PT_TILD: LAYER_SYSTEM (momentary) on hold, tilde/grave on tap.
+// Manual tap-hold so the tap emits the symbol directly via tap_code16(),
+// avoiding KC_TILD's embedded-Shift clash with a key override (see enum above).
+//   - tap, no shift held   -> '~'  (KC_TILD, i.e. Shift+`)
+//   - tap, with shift held -> '`'  (KC_GRV), shift suppressed for this tap
+//   - hold                 -> LAYER_SYSTEM momentary
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     static uint16_t sft_coln_timer    = 0;
     static uint8_t  sft_coln_ext_shift = 0; // shift held by *other* keys at press time
+    static uint16_t pt_tild_timer      = 0;
+
+    if (keycode == PT_TILD) {
+        if (record->event.pressed) {
+            pt_tild_timer = timer_read();
+            layer_on(LAYER_SYSTEM);
+        } else {
+            layer_off(LAYER_SYSTEM);
+            if (timer_elapsed(pt_tild_timer) < TAPPING_TERM) {
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    // Shift held: suppress it so the host sees a bare '`',
+                    // then restore it for subsequent keys.
+                    uint8_t saved = get_mods();
+                    del_mods(MOD_MASK_SHIFT);
+                    send_keyboard_report();
+                    tap_code16(KC_GRV);
+                    set_mods(saved);
+                    send_keyboard_report();
+                } else {
+                    tap_code16(KC_TILD);
+                }
+            }
+        }
+        return false;
+    }
 
     if (keycode == SFT_COLN) {
         if (record->event.pressed) {
